@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
         integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
     </script>
-        
+
     {{-- ICONS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
@@ -45,7 +45,8 @@
 
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link item-nav" href="/login"><i class="bi bi-box-arrow-in-right"></i> Entrar</a>
+                                <a class="nav-link item-nav" href="/login"><i class="bi bi-box-arrow-in-right"></i>
+                                    Entrar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/register"><i class="bi bi-person-plus"></i> Cadastrar-se</a>
@@ -54,7 +55,8 @@
 
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link disabled" style="color: #fff"><i class="bi bi-person-square"></i> {{ Auth::user()->name }}</a>
+                                <a class="nav-link disabled" style="color: #fff"><i class="bi bi-person-square"></i>
+                                    {{ Auth::user()->name }}</a>
                             </li>
 
                             <li class="nav-item">
@@ -67,6 +69,13 @@
 
                                 </a>
                             </li>
+
+                            @can('Visualizar painel administrativo')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/painel" style="color: #fff"><i class="bi bi-controller"></i>
+                                        Controle de Acesso</a>
+                                </li>
+                            @endcan
 
                             <form action="logout" method="post">
                                 @csrf

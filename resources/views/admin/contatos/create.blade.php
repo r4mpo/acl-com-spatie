@@ -1,5 +1,5 @@
 @extends('template.main')
-@section('title', 'Cadastrar novo contato')
+@section('title', '+ Contato')
 @section('content')
 
 <div class="formulario">
