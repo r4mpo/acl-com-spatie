@@ -19,6 +19,8 @@
         integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
     </script>
 
+    <link rel="shortcut icon" href="/img/control.png" type="image/x-icon">
+
     {{-- ICONS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
