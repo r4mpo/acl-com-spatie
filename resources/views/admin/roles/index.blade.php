@@ -1,6 +1,15 @@
 @extends('template.main')
 @section('title', 'Painel de Controle')
 @section('content')
+
+    @if (session('msg'))
+        <div class="msg" id="msg">
+            <p><span> <button type="button" onclick="removerMensagem('msg')" class="btn-close btn-close-white"
+                        aria-label="Close"></button>
+                    {{ session('msg') }}</span></p>
+        </div>
+    @endif
+
     <table class="table table-bordered border-danger tabela-ajustada-css-2">
         <thead>
             <tr>
@@ -28,8 +37,8 @@
                     <td>{{ $role->name }}</td>
 
                     @can('Visualizar perfil de acesso')
-                        <td><a href="/role/show/{{ base64_encode($role->id) }}"><button type="button" class="btn btn-success"><i
-                                        class="bi bi-eye-fill"></i></button></a></td>
+                        <td><a href="/role/show/{{ base64_encode($role->id) }}"><button type="button"
+                                    class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a></td>
                     @endcan
 
                     @can('Editar perfil de acesso')

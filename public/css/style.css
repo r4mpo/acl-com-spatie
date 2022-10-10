@@ -1,84 +1,32 @@
-@media screen and (min-width: 992px) {
-    .tabela-ajustada-css {
-        width: 700px;
-        font-size: 14px;
-        margin-left: 24%;
-        margin-top: 5%;
-    }
-
-    .tabela-ajustada-css-2 {
-        width: 400px;
-        font-size: 14px;
-        margin-left: 35%;
-        margin-top: 5%;
-    }
-
-    .info-permissoes {
-        display: inline-block;
-    }
-
-    .formulario {
-        width: 350px;
-        padding: 10px 10px 10px 10px;
-        margin-top: 10px;
-        margin-left: 10px;
-        border: 1px solid #ff00aa;
-    }
-
-    .formulario-cadastrar-role {
-        width: 350px;
-        padding: 10px 10px 10px 10px;
-        margin-top: 10px;
-        margin-left: 10px;
-        color: #fff;
-        border: 1px solid #ff00aa;
-    }
-
-    .btn-css-ajuste {
-        margin-left: 24%;
-    }
-
-    .btn-css-ajuste-2 {
-        margin-left: 35%;
-    }
-
-    .nav-logout {
-        margin-top: 10px;
-        margin-left: 10px;
-    }
-
-    .info-guest {
-        position: absolute;
-        left: 30%;
-        top: 30%;
-    }
-
-    .permissoes {
-        margin-bottom: 10px;
-    }
-
-    .page {
-        margin-left: 45%;
-    }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap');
-
-.info-guest {
-    color: #fff
-}
-
-.page {
-    position: fixed;
-    bottom: 50px;
-}
-
-li, a {
-    text-decoration: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,300&display=swap");
 
 * {
-    font-family: 'Noto Sans Mono', monospace;
+    font-family: "Rubik", sans-serif;
+}
+
+.info-guest {
+    color: #fff;
+}
+
+.formulario-cadastrar-role {
+    color: #fff;
+    border: 1px solid #ff00aa;
+}
+
+.formulario {
+    border: 1px solid #ff00aa;
+}
+
+.msg {
+    background-color: #690164;
+    border: 1px solid #ff00b3;
+    color: #ffdff4;
+    text-align: center;
+}
+
+li,
+a {
+    text-decoration: none;
 }
 
 .tabela-ajustada-css {
@@ -103,20 +51,13 @@ body {
     background-color: #5e0056;
 }
 
-.navbar-class a, li, ul {
+.navbar-class a,
+li,
+ul {
     color: #fff;
 }
 
-footer {
-    border-top: 1px solid #ff00aa;
-    padding: 25px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #5e0056;
-    color: #fff;
-    font-size: 17px;
-    text-align: center;
-    height: 15px;
-    line-height: 1px;
+.nav-item a:hover {
+    color: #ff00aa;
+    background-color: #29011c;
 }

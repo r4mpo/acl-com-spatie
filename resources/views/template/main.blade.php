@@ -26,9 +26,11 @@
 
     {{-- CSS --}}
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/media-query.css">
 
     {{-- JS --}}
     <script src="/js/mask-phone.js"></script>
+    <script src="/js/remove-msg.js"></script>
 
     <title>@yield('title')</title>
 </head>
@@ -37,11 +39,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-class">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">ACL-COM-SPATIE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand" href="/">
+                    <img src="/img/control.png" alt="Bootstrap" width="30" height="24">
+                </a>
                 <div class="collapse navbar-collapse item-nav" id="navbarNav">
                     <ul class="navbar-nav">
 
@@ -57,12 +57,12 @@
 
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link disabled" style="color: #fff"><i class="bi bi-person-square"></i>
+                                <a class="nav-link item-nav" href="/user/profile"><i class="bi bi-person-square"></i>
                                     {{ Auth::user()->name }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link disabled" style="color: #fff"><i class="bi bi-key"></i>
+                                <a class="nav-link item-nav" href="/dashboard"><i class="bi bi-key"></i>
 
                                     {{-- Exibindo role do usuário --}}
                                     @foreach (Auth::user()->roles->pluck('name') as $role)
@@ -74,15 +74,15 @@
 
                             @can('Visualizar painel administrativo')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/painel" style="color: #fff"><i class="bi bi-controller"></i>
+                                    <a class="nav-link item-nav" href="/painel"><i class="bi bi-controller"></i>
                                         Controle de Acesso</a>
                                 </li>
                             @endcan
 
-                            <form action="logout" method="post">
+                            <form action="/logout" method="post">
                                 @csrf
                                 <li class="nav-logout">
-                                    <a href="logout" onclick="event.preventDefault();this.closest('form').submit();">
+                                    <a href="/logout" onclick="event.preventDefault();this.closest('form').submit();">
                                         <i class="bi bi-box-arrow-in-left"></i> Sair
                                     </a>
                                 </li>
@@ -96,10 +96,5 @@
 
     @yield('content')
 
-    <footer>
-        <p>TODOS OS DIREITOS RESERVADOS &copy; | @r4mpo | ACL-COM-SPATIE</p>
-    </footer>
-
 </body>
-
 </html>

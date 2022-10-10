@@ -9,6 +9,13 @@ use Spatie\Permission\Models\Role; /* Model das roles */
 
 class RolesController extends Controller
 {
+    protected $funcionalidades = [
+        'Contatos'              => 'contato',
+        'Perfis de Acesso'      => 'perfil',
+        'E-mail'                => 'e-mail',
+        'Painel Administrativo' => 'administrativo'
+    ];
+
     public function index()
     {
         return view('admin.roles.index', ['roles' => Role::all()]);
@@ -16,55 +23,56 @@ class RolesController extends Controller
 
     public function create()
     {
-        return view('admin.roles.create', ['permissions' => Permission::all()]);
-    }
-
-    public function store(Request $request)
-    {
-        foreach ($request->permissions as $permissions => $permission) {
-            $permissoes[] = $permission;
-        }
-
-        Role::create(['name' => $request->name])->givePermissionTo($permissoes);
-        return redirect('/painel');
+        return view('admin.roles.create', ['permissions' => Permission::all(), 'funcionalidades' => $this->funcionalidades]);
     }
 
     public function show($id)
     {
-        $id_decodificado = base64_decode($id);
-        return view('admin.roles.show', ['role' => Role::findOrFail($id_decodificado)]);
+        return view('admin.roles.show', ['role' => Role::findOrFail(base64_decode($id))]);
     }
 
     public function edit($id)
     {
-        $id_decodificado = base64_decode($id);
-        return view('admin.roles.edit', ['role' => Role::findOrFail($id_decodificado), 'permissions' => Permission::all()]);
+        return view('admin.roles.edit', ['role' => Role::findOrFail(base64_decode($id)), 'permissions' => Permission::all(), 'funcionalidades' => $this->funcionalidades]);
     }
+
+    public function store(Request $request)
+    {
+        try 
+        {
+            Role::create(['name' => $request->name])->givePermissionTo($request->permissions);  
+            return redirect('/painel')->with('msg', 'Perfil de acesso cadastrado com sucesso.');
+        } 
+        catch(\Exception $e)
+        {
+            return redirect('/painel')->with('msg', 'Houve um erro ao cadastrar o perfil de acesso.');
+        }
+    }
+
     public function update(Request $request, $id)
     {
-        $id_decodificado = base64_decode($id);
-        $role = Role::findOrFail($id_decodificado);
+        $role = Role::findOrFail(base64_decode($id));
 
-        foreach ($request->permissions as $permissions => $permission) {
-            $permissoes[] = $permission;
-        }
-
-        foreach ($role->permissions as $permissao) {
-            if (!in_array($permissao, $permissoes)) {
-                $role->revokePermissionTo($permissao);
+        try
+        {
+            foreach ($role->permissions as $permission) {
+                $role->revokePermissionTo($permission->name);
             }
-        }
 
-        $role->update(['name' => $request->name]);
-        $role->givePermissionTo($permissoes);
+            $role->update(['name' => $request->name]);
+            $role->givePermissionTo($request->permissions);
+            return redirect('/painel')->with('msg', 'Perfil de acesso editado com sucesso.');
+        } 
         
-        return redirect('/painel');
+        catch (\Exception $e) 
+        {
+            return redirect('/painel')->with('msg', 'Houve um erro ao editar o perfil de acesso.');
+        }
     }
 
     public function destroy($id)
     {
-        $id_decodificado = base64_decode($id);
-        Role::findOrFail($id_decodificado)->delete();
-        return redirect('/painel');
+        Role::findOrFail(base64_decode($id))->delete();
+        return redirect('/painel')->with('msg', 'Perfil de acesso excluído com sucesso.');
     }
 }

@@ -21,7 +21,7 @@ class ContatosController extends Controller
     public function store(Request $request)
     {
         Contato::create($request->all());
-        return redirect('/');
+        return redirect('/')->with('msg', 'O contato foi cadastrado com sucesso.');
     }
 
     public function show($id)
@@ -39,14 +39,14 @@ class ContatosController extends Controller
     {
         $id_decodificado = base64_decode($id);
         Contato::findOrFail($id_decodificado)->update($request->all());
-        return redirect('/');
+        return redirect('/')->with('msg', 'O contato foi editado com sucesso.');
     }
 
     public function destroy($id)
     {
         $id_decodificado = base64_decode($id);
         Contato::findOrFail($id_decodificado)->delete();
-        return redirect('/');
+        return redirect('/')->with('msg', 'O contato foi excluído com sucesso.');
     }
 
     public function send_email($id) 
@@ -60,6 +60,6 @@ class ContatosController extends Controller
             $dados_email->subject('Confira os dados do contato');
         });
 
-        return redirect('/');
+        return redirect('/')->with('msg', 'O e-mail foi enviado com sucesso.');
     }
 }

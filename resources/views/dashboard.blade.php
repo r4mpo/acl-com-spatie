@@ -1,15 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
-        </div>
+@extends('template.main')
+@section('title', 'Dashboard')
+@section('content')
+    <div class="info-guest">
+        <p>Seja bem-vindo, {{ Auth::user()->name }} :D</p>
+        <p>A nossa dashboard está em construção... <i class="bi bi-gear-fill"></i></p>
+        <p>Divirta-se com as suas permissões.</p>
     </div>
-</x-app-layout>
+@endsection

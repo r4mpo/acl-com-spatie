@@ -1,6 +1,14 @@
 @extends('template.main')
-@section('title', 'ACL-COM-SPATIE')
+@section('title', 'LaraSpatie')
 @section('content')
+
+    @if (session('msg'))
+        <div class="msg" id="msg">
+            <p><span> <button type="button" onclick="removerMensagem('msg')" class="btn-close btn-close-white" aria-label="Close"></button>
+                {{ session('msg') }}</span></p>
+        </div>
+    @endif
+
     @auth
         @can('Visualizar contatos')
             <table class="table table-bordered border-danger tabela-ajustada-css">

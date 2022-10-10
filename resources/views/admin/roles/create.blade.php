@@ -1,9 +1,7 @@
 @extends('template.main')
 @section('title', '+ Perfil de Acesso')
 @section('content')
-
     <div class="formulario-cadastrar-role">
-
         <form action="/role/store" method="post">
             @csrf
 
@@ -19,20 +17,26 @@
             </div>
 
             {{-- Permissões --}}
-            <div class="permissoes">
-                <p>Permissões</p>
 
-                @foreach ($permissions as $permission)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}"
-                            id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            {{ $permission->name }}
-                        </label>
-                    </div>
-                @endforeach
+            @foreach ($funcionalidades as $titulo => $funcionalidade)
+                <div class="permissoes">
+                    <p>{{ $titulo }}</p>
 
-            </div>
+                    @foreach ($permissions as $permission)
+                        @if (strpos($permission->name, $funcionalidade) !== false)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[]"
+                                    value="{{ $permission->name }}" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ $permission->name }}
+                                </label>
+                            </div>
+                        @endif
+                    @endforeach
+
+                    <hr>
+                </div>
+            @endforeach
 
             <div class="bottom-btn">
                 <button type="submit" class="btn btn-outline-success"><i class="bi bi-save"></i> Salvar</button>
@@ -40,6 +44,5 @@
                             class="bi bi-arrow-return-left"></i> Voltar</button></a>
             </div>
         </form>
-
     </div>
 @endsection
